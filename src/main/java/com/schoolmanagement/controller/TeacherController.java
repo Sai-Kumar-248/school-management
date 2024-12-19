@@ -22,7 +22,7 @@ public class TeacherController {
     @PostMapping("/addTeacher")
     //@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<TeacherDTO> addTeacher(@RequestBody Teacher teacher) {
-        TeacherDTO savedTeacher = teacherService.addTeacher(teacher);
+        TeacherDTO savedTeacher =  teacherService.addTeacher(teacher);
         return ResponseEntity.ok(savedTeacher);
     }
 
