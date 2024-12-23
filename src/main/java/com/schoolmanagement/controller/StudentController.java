@@ -17,12 +17,13 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/students")
+@CrossOrigin(origins = "http://localhost:3000")
 public class StudentController {
     @Autowired
     private StudentService studentService;
 
     @GetMapping
-    @PreAuthorize("hasRole('USER')")
+   // @PreAuthorize("hasRole('USER')")
     public List<StudentDTO> getAllStudents() {
 
         return studentService.getAllStudents();
@@ -42,7 +43,7 @@ public class StudentController {
         return studentService.saveStudent(student);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/updateStudent/{id}")
     public Optional<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
         Optional<Student> updatedStudent=    studentService.updateStudentById(id,student);
 
@@ -50,7 +51,7 @@ public class StudentController {
 
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/deleteStudent/{id}")
     public ResponseEntity<Void> deleteStudent(@PathVariable Long id) {
         if (studentService.getStudentById(id).isPresent()) {
             studentService.deleteStudent(id);

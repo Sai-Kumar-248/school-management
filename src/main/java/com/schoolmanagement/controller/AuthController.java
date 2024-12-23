@@ -21,6 +21,7 @@ import java.util.Arrays;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin
 public class AuthController {
 
     @Autowired
@@ -32,8 +33,9 @@ public class AuthController {
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
         // Hardcoded credentials for simplicity
         if ("user".equals(loginRequest.getUsername()) && "password".equals(loginRequest.getPassword())) {
-            String token = jwtUtil.generateToken(loginRequest.getUsername(), Arrays.asList("USER"));
-            return ResponseEntity.ok(new JwtResponse(token));
+           // String token = jwtUtil.generateToken(loginRequest.getUsername(), Arrays.asList("USER"));
+            //return ResponseEntity.ok(new JwtResponse(token));
+            return ResponseEntity.ok("valid credentials");
         }
         return ResponseEntity.status(401).body("Invalid credentials");
     }

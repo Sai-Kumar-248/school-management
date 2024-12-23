@@ -12,6 +12,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/classes")
+@CrossOrigin
 public class ClassController {
 
     @Autowired
