@@ -73,9 +73,9 @@ public class StudentService {
         return Optional.of(oldstudent);
     }
 
-    public List<StudentDTO> getStudentsByClass(String name){
+    public List<StudentDTO> getStudentsByClass(String name, String section){
         // Fetching students for the given class ID
-        List<Student> byStudentClassName = studentRepository.findByStudentClassName(name);
+        List<Student> byStudentClassName = studentRepository.findByStudentClassNameAndSection(name,section);
         return byStudentClassName.stream().map(StudentDTO::new).collect(Collectors.toList());
 
     }

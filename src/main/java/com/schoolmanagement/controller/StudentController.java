@@ -60,11 +60,17 @@ public class StudentController {
         return ResponseEntity.notFound().build();
     }
 
-    @GetMapping("/class/{className}")
-    public ResponseEntity<List<StudentDTO>> getStudentsByClass(@RequestParam(value = "The name of the class", required = true) @PathVariable String name) {
-        List<StudentDTO> students = studentService.getStudentsByClass(name);
+
+
+    @GetMapping("/class/{className}/{section}")
+    public ResponseEntity<List<StudentDTO>> getStudentsByClass(
+            @PathVariable("className") String className,
+            @PathVariable("section") String section) {
+
+        List<StudentDTO> students = studentService.getStudentsByClass(className, section);
         return ResponseEntity.ok(students);
     }
+
 
     @PatchMapping("/{id}")
     public ResponseEntity<Student> updateStudentPartial(@PathVariable Long id, @RequestBody Map<String, Object> updates) {

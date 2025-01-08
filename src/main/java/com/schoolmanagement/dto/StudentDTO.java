@@ -8,7 +8,7 @@ public class StudentDTO {
     private String rollNumber;
     private String name;
     private int age;
-    private String grade;
+    private String section;
     private String studentClassName;
 
     public StudentDTO(Student student) {
@@ -16,7 +16,7 @@ public class StudentDTO {
         this.rollNumber = student.getRollNumber();
         this.name = student.getName();
         this.age = student.getAge();
-        this.grade = student.getSection();
+        this.section = student.getSection();
         this.studentClassName = student.getStudentClassName();
     }
 
@@ -60,12 +60,12 @@ public class StudentDTO {
         this.studentClassName = studentClassName;
     }
 
-    public String getGrade() {
-        return grade;
+    public String getSection() {
+        return section;
     }
 
-    public void setGrade(String grade) {
-        this.grade = grade;
+    public void setSection(String section) {
+        this.section = section;
     }
 
 }

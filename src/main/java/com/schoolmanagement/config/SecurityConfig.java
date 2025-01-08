@@ -49,11 +49,11 @@ public class SecurityConfig {
                         .requestMatchers("/api/students/addStudent").permitAll()
                         .requestMatchers("/api/students/{id}").permitAll()
                         //.requestMatchers("/api/students").hasRole("USER")
-                        .requestMatchers("/api/students/class/{className}").permitAll()
+                        .requestMatchers("/api/students/class/{className}/{section}").permitAll()
                        // .requestMatchers("/api/students/addStudent").hasRole("USER")
                         .requestMatchers("/swagger-ui/**").permitAll() // Allow access to Swagger UI
                         .requestMatchers("/v3/api-docs/**").permitAll()
-                        .requestMatchers("/classes").permitAll()
+                        .requestMatchers("api/classes/allclasses").permitAll()
                         .requestMatchers("/teachers").permitAll()
                         //.requestMatchers("/teachers/addTeacher").hasRole("ADMIN") // Restrict to ROLE_ADMIN
                         .requestMatchers("class/{className}").permitAll()
@@ -61,6 +61,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/students").permitAll()// Allow access to OpenAPI documentation
                         .requestMatchers("/api/students/deleteStudent/{id}").permitAll()
                         .requestMatchers("api/students/updateStudent/{id}").permitAll()
+                        .requestMatchers("/api/students/addStudent)").permitAll()
                         .anyRequest().authenticated()); // All other requests require authentication
 
         return http.build();

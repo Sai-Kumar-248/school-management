@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/classes")
-@CrossOrigin
+@RequestMapping("api/classes")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ClassController {
 
     @Autowired
@@ -34,7 +34,7 @@ public class ClassController {
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("/allclasses")
     public ResponseEntity<List<ClassDTO>> getAllClasses() {
         return ResponseEntity.ok(classService.getAllClasses());
     }
