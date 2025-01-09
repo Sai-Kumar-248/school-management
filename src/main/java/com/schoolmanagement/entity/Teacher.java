@@ -1,65 +1,67 @@
 package com.schoolmanagement.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+
 import java.util.List;
-import java.util.*;
 
 
-import jakarta.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "teachers")
 public class Teacher {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long teacherId;
 
-    private String name;
+    private String teacherName;
+    private String teacherPhone;
+    private String teacherEmail;
 
-    private String email;
-
-    private String phone;
-
-    @OneToMany(mappedBy = "teacher", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Subject> subjects = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "teacher_subject",
+            joinColumns = @JoinColumn(name = "teacher_id"),
+            inverseJoinColumns = @JoinColumn(name = "subject_id")
+    )
+    @JsonManagedReference
+    private List<Subject> subjects;
 
     // Getters and Setters
-    public Long getId() {
-        return id;
+    public Long getTeacherId() {
+        return teacherId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public String getName() {
-        return name;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTeacherPhone() {
+        return teacherPhone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setTeacherPhone(String teacherPhone) {
+        this.teacherPhone = teacherPhone;
     }
 
-    public String getPhone() {
-        return phone;
+    public String getTeacherEmail() {
+        return teacherEmail;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
     }
-
 
     public List<Subject> getSubjects() {
         return subjects;

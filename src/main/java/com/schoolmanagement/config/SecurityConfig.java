@@ -54,10 +54,12 @@ public class SecurityConfig {
                         .requestMatchers("/swagger-ui/**").permitAll() // Allow access to Swagger UI
                         .requestMatchers("/v3/api-docs/**").permitAll()
                         .requestMatchers("api/classes/allclasses").permitAll()
-                        .requestMatchers("/teachers").permitAll()
-                        //.requestMatchers("/teachers/addTeacher").hasRole("ADMIN") // Restrict to ROLE_ADMIN
+                        .requestMatchers("/api/teachers").permitAll()
+                        .requestMatchers("/api/teachers/{id}").permitAll()
+                        .requestMatchers("/api/teachers/addTeacher").permitAll()
+                        .requestMatchers("/api/teachers/updateTeacher/{id}").permitAll()
                         .requestMatchers("class/{className}").permitAll()
-                        .requestMatchers("/teachers/addTeacher").permitAll()
+                        .requestMatchers("/api/teachers/updateTeacher/**").permitAll()
                         .requestMatchers("/api/students").permitAll()// Allow access to OpenAPI documentation
                         .requestMatchers("/api/students/deleteStudent/{id}").permitAll()
                         .requestMatchers("api/students/updateStudent/{id}").permitAll()

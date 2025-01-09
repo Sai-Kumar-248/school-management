@@ -1,44 +1,48 @@
 package com.schoolmanagement.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
+@Table(name = "subjects")
 public class Subject {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long subjectId;
+    private Long id;
 
-    private String subjectName;
+    private String name;
 
+    // You can add more fields if needed, e.g., description
 
+    @ManyToMany(mappedBy = "subjects")
+    @JsonBackReference
+    private List<Teacher> teachers;
 
-    @ManyToOne
-    @JoinColumn(name = "teacher_id", nullable = false)
-    private Teacher teacher;
-
-
-    public Teacher getTeacher() {
-        return teacher;
+    // Getters and Setters
+    public Long getId() {
+        return id;
     }
 
-    public void setTeacher(Teacher teacher) {
-        this.teacher = teacher;
-    }
-    public String getSubjectName() {
-        return subjectName;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
+    public String getName() {
+        return name;
     }
 
-
-    public void setSubjectId(Long subjectId) {
-        this.subjectId = subjectId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public Long getSubjectId() {
-        return subjectId;
+    public List<Teacher> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<Teacher> teachers) {
+        this.teachers = teachers;
     }
 }

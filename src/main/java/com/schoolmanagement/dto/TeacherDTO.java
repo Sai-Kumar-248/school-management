@@ -1,70 +1,48 @@
 package com.schoolmanagement.dto;
 
-import com.schoolmanagement.entity.Subject;
-import com.schoolmanagement.entity.Teacher;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.OneToMany;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TeacherDTO {
 
-    private Long id;
+    private Long teacherId;
+    private String teacherName;
+    private String teacherPhone;
+    private String teacherEmail;
+    private List<SubjectDTO> subjects; // Change to List<SubjectDTO>
 
-    private String name;
-
-    private String email;
-
-    private String phone;
-
-
-
-    private List<SubjectDTO> subjects = new ArrayList<>();
-
-    public TeacherDTO(Teacher teacher) {
-        this.id = teacher.getId();
-        this.name = teacher.getName();
-        this.email = teacher.getEmail();
-        this.phone = teacher.getPhone();
-        // Convert Subject Entities to SubjectDTOs
-        this.subjects = teacher.getSubjects()
-                .stream()
-                .map(SubjectDTO::new)
-                .collect(Collectors.toList());
+    // Getters and Setters
+    public Long getTeacherId() {
+        return teacherId;
     }
 
-    public Long getId() {
-        return id;
+    public void setTeacherId(Long teacherId) {
+        this.teacherId = teacherId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public String getTeacherName() {
+        return teacherName;
     }
 
-    public String getName() {
-        return name;
+    public void setTeacherName(String teacherName) {
+        this.teacherName = teacherName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public String getTeacherPhone() {
+        return teacherPhone;
     }
 
-    public String getEmail() {
-        return email;
+    public void setTeacherPhone(String teacherPhone) {
+        this.teacherPhone = teacherPhone;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public String getTeacherEmail() {
+        return teacherEmail;
     }
 
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setTeacherEmail(String teacherEmail) {
+        this.teacherEmail = teacherEmail;
     }
 
     public List<SubjectDTO> getSubjects() {
@@ -74,6 +52,4 @@ public class TeacherDTO {
     public void setSubjects(List<SubjectDTO> subjects) {
         this.subjects = subjects;
     }
-
-
 }
