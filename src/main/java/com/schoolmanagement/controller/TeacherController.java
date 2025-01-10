@@ -3,6 +3,7 @@ package com.schoolmanagement.controller;
 
 import com.schoolmanagement.dto.TeacherDTO;
 import com.schoolmanagement.entity.Teacher;
+import com.schoolmanagement.exceptions.ResourceNotFoundException;
 import com.schoolmanagement.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,10 +20,19 @@ public class TeacherController {
     @Autowired
     private TeacherService teacherService;
 
-    // Get all teachers
-    @GetMapping
+//    // Get all teachers
+//    @GetMapping
+//    public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
+//        List<TeacherDTO> teachers = teacherService.getAllTeachers();
+//        return new ResponseEntity<>(teachers, HttpStatus.OK);
+//    }
+
+    @GetMapping("/allteachers")
     public ResponseEntity<List<TeacherDTO>> getAllTeachers() {
         List<TeacherDTO> teachers = teacherService.getAllTeachers();
+        if (teachers.isEmpty()) {
+            throw new ResourceNotFoundException("No teachers found.");
+        }
         return new ResponseEntity<>(teachers, HttpStatus.OK);
     }
 
@@ -38,8 +48,17 @@ public class TeacherController {
     }
 
     // Create a new teacher
+//    @PostMapping("/addTeacher")
+//    public ResponseEntity<TeacherDTO> createTeacher(@RequestBody TeacherDTO teacherDTO) {
+//        TeacherDTO createdTeacher = teacherService.createTeacher(teacherDTO);
+//        return new ResponseEntity<>(createdTeacher, HttpStatus.CREATED);
+//    }
+
     @PostMapping("/addTeacher")
-    public ResponseEntity<TeacherDTO> createTeacher(@RequestBody TeacherDTO teacherDTO) {
+    public ResponseEntity<TeacherDTO> addTeacher(@RequestBody TeacherDTO teacherDTO) {
+        if (teacherDTO.getTeacherName() == null || teacherDTO.getTeacherEmail() == null) {
+            throw new IllegalArgumentException("Teacher name and email must not be null.");
+        }
         TeacherDTO createdTeacher = teacherService.createTeacher(teacherDTO);
         return new ResponseEntity<>(createdTeacher, HttpStatus.CREATED);
     }

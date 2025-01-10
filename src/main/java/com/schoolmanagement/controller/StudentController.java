@@ -1,6 +1,8 @@
 package com.schoolmanagement.controller;
 
 import com.schoolmanagement.dto.StudentDTO;
+import com.schoolmanagement.exceptions.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,11 +24,20 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @GetMapping
-   // @PreAuthorize("hasRole('USER')")
-    public List<StudentDTO> getAllStudents() {
+//    @GetMapping
+//   // @PreAuthorize("hasRole('USER')")
+//    public List<StudentDTO> getAllStudents() {
+//
+//        return studentService.getAllStudents();
+//    }
 
-        return studentService.getAllStudents();
+    @GetMapping("/allteachers")
+    public ResponseEntity<List<StudentDTO>> getAllStudents() {
+        List<StudentDTO> students = studentService.getAllStudents();
+        if (students.isEmpty()) {
+            throw new ResourceNotFoundException("No Students found.");
+        }
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")

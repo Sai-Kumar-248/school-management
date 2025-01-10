@@ -42,4 +42,16 @@ public class ClassService {
 
         return allClasses.stream().map(ClassDTO::new).collect(Collectors.toList());
     }
+
+    public Class findClass(Long id) {
+        Class existingClass = classRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Class not found with ID: " + id));
+        return existingClass;
+    }
+
+    public Class findClassByNameAndSection(String name, String section) {
+
+        Class existingClass = classRepository.findClassByNameAndSection(name,section);
+        return existingClass;
+    }
 }
